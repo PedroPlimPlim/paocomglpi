@@ -1,0 +1,54 @@
+from modules import scrapper, cafe_elsys
+
+MENU = """
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡆⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠡⡀⠁⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠀⠘⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⢌⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⠄⠐⠆⠂⡑⠐⡀⠄⣀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⣔⠁⣠⣖⣶⣶⣏⢷⢶⣾⣥⣄⠑⠄⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⢀⠄⠀⡟⣿⣿⣿⣷⣯⡽⣿⣷⣾⣿⣿⣷⠀⡐⢄⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠤⡖⠈⠤⠔⣑⠉⠛⠻⠿⠿⠿⠿⠟⠛⠩⢈⣻⡾⠀⠂⠀⠀⠀
+    ⠀⠀⠀⠸⢸⡆⠀⡀⠴⡌⠨⣀⠀⠀⠀⠀⠀⠀⢦⠦⢵⠟⢁⢠⠄⠀⠀⠀
+    ⠀⠀⠀⠘⠊⢿⣮⡀⠀⠊⠀⠨⠚⢒⣶⣶⠒⠊⠅⠀⠁⠀⢀⠌⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠨⠭⡿⣦⣤⢀⡀⠀⠀⠀⠀⠀⠀⣀⣀⡤⠞⠁⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠈⠁⠘⠻⠙⠺⠿⠟⠿⠟⠚⠋⠁⠀⠀⠀ 
+                                                                                     ☕    by: @pedroplimplim
+╔══════════════════════════════════════════════╗
+║               Café com GLPI                  ║
+╠══════════════════════════════════════════════╣
+║  1. Scrapping de chamados                    ║
+║  2. Café com Elsys                           ║
+║                                              ║
+║  0. Sair                                     ║
+╚══════════════════════════════════════════════╝
+"""
+
+OPCOES = {
+    "1": scrapper.run,
+    "2": cafe_elsys.run,
+}
+
+
+def main():
+    while True:
+        try:
+            print(MENU)
+            opcao = input("  Selecione uma opção: ").strip()
+
+            if opcao == "0":
+                print("\n  Até mais!\n")
+                break
+            elif opcao in OPCOES:
+                resultado = OPCOES[opcao]()
+                if resultado is not False:
+                    input("\n  Pressione Enter para voltar ao menu...")
+            else:
+                print("\n  Opção inválida. Tente novamente.")
+
+        except KeyboardInterrupt:
+            print("\n\n  ⚠ Processo interrompido. Voltando ao menu...\n")
+
+
+if __name__ == "__main__":
+    main()

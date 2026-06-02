@@ -1,0 +1,12 @@
+# Dependências e cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Pastas de trabalho (não versionar planilhas)
+input/
+output/
+
+# Manter as pastas vazias no repositório
+!input/.gitkeep
+!output/.gitkeep
