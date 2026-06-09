@@ -91,17 +91,21 @@ def run():
     col_res   = cabecalho[COLUNA_RESULTADO]
     col_obs   = cabecalho[COLUNA_OBSERVACAO]
 
+    def _celula_vazia(cell):
+        return not str(cell.value or "").strip()
+
     # Linhas pendentes: tem ticket e analista ainda não preenchido
     linhas = [
         row[col_ticket - 1].row
         for row in ws.iter_rows(min_row=linha_cabecalho + 1)
-        if row[col_ticket - 1].value and not row[col_anal - 1].value
+        if not _celula_vazia(row[col_ticket - 1]) and _celula_vazia(row[col_anal - 1])
     ]
 
     total = len(linhas)
     print(f"  [EXCEL] {total} chamados para processar\n")
     if total == 0:
         print("  [OK] Nada para processar.")
+        print("       Verifique se a coluna 'Analista' já está preenchida na planilha.")
         return
 
     with sync_playwright() as pw:

@@ -169,10 +169,13 @@ def run():
     col_inicio = cabecalho[config.COLUNA_INICIO_ATENDIMENTO]
     col_final  = cabecalho[config.COLUNA_FINAL_ATENDIMENTO]
 
+    def _celula_vazia(cell):
+        return not str(cell.value or "").strip()
+
     linhas = [
         row[col_ticket - 1].row
         for row in ws.iter_rows(min_row=linha_cabecalho + 1)
-        if row[col_ticket - 1].value and not row[col_anal - 1].value
+        if not _celula_vazia(row[col_ticket - 1]) and _celula_vazia(row[col_anal - 1])
     ]
 
     total = len(linhas)
